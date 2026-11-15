@@ -16,7 +16,7 @@
       hint: "세션 제어",
       icon: "activity",
     },
-    "/broadcasts": { label: "방송 보관함", hint: "방송별 녹화 이력", icon: "folder" },
+    "/broadcasts": { label: "녹화 목록", hint: "방송별 녹화 이력", icon: "folder" },
     "/jobs": { label: "작업 상태", hint: "검증·합치기·복구", icon: "operations" },
     "/config": {
       label: "설정 관리",
@@ -293,7 +293,7 @@
     const recordingLink = nav.querySelector('a[href="/recording"]');
     if (recordingLink) {
       let after = recordingLink;
-      [["/broadcasts", "방송 보관함"], ["/jobs", "작업 상태"]].forEach(function (item) {
+      [["/broadcasts", "녹화 목록"], ["/jobs", "작업 상태"]].forEach(function (item) {
         let link = nav.querySelector('a[href="' + item[0] + '"]');
         if (!link) { link = document.createElement("a"); link.href = item[0]; link.textContent = item[1]; after.insertAdjacentElement("afterend", link); }
         after = link;

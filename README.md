@@ -2,15 +2,40 @@
 
 # Live Auto Recorder
 
-CHZZK · YouTube 라이브 자동 녹화 도구
+**좋아하는 라이브, 놓치지 않고 자동으로 기록하세요.**
 
-[![Docker pulls](https://img.shields.io/docker/pulls/yeowoonlee/live-auto-recorder?logo=docker&label=pulls)](https://hub.docker.com/r/yeowoonlee/live-auto-recorder)
+CHZZK · YouTube 라이브를 감지하고 녹화부터 보관까지 관리하는 셀프 호스팅 도구
+
+[![Docker pulls](https://img.shields.io/docker/pulls/yeowoonlee/live-auto-recorder?logo=docker&label=Docker%20pulls)](https://hub.docker.com/r/yeowoonlee/live-auto-recorder)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+[빠른 설치](#설치) · [주요 기능](#주요-기능) · [화면 미리보기](#화면-미리보기) · [운영 가이드](docs/OPERATIONS.md)
 
 </div>
 
-CHZZK와 YouTube 라이브를 자동으로 감지해서 녹화하고, 웹 화면에서 상태와 녹화 파일을 관리할 수 있는 Docker 기반 도구입니다.
+---
 
-개인 서버나 홈서버에서 계속 켜 두고 사용하는 환경을 기준으로 만들었습니다.
+개인 서버나 홈서버에서 방송을 자동으로 녹화하고, 웹 화면에서 상태와 파일을 한눈에 관리하세요.
+
+## 화면 미리보기
+
+### 대시보드
+
+녹화 현황과 저장 공간, 시스템 상태를 한눈에 확인합니다.
+
+![녹화 대시보드 예시](docs/images/dashboard.png)
+
+### 녹화 목록
+
+방송별 녹화 기록과 파일, 검증 상태를 찾아볼 수 있습니다.
+
+![녹화 목록 예시](docs/images/library.png)
+
+### 작업 상태
+
+검증·합치기·복구 등 작업 상태를 확인합니다. 영속 엔진이 꺼져 있으면 관련 작업 기능은 비활성화됩니다.
+
+![작업 상태 예시](docs/images/jobs.png)
 
 ## 주요 기능
 
@@ -27,13 +52,13 @@ CHZZK와 YouTube 라이브를 자동으로 감지해서 녹화하고, 웹 화면
 - rclone을 이용한 외부 스토리지 보관
 - 녹화 기록, 백업/복원, 시스템 점검 등 운영 기능
 
-## 화면과 방송 보관함
+## 화면과 녹화 목록
 
 기존 v1 대시보드(`/`)와 녹화·설정·채널·파일·운영 관리 화면을 그대로 사용합니다.
-같은 메뉴와 디자인 안에 **방송 보관함**(`/broadcasts`)과 **작업 상태**(`/jobs`)를 추가했습니다.
+같은 메뉴와 디자인 안에 **녹화 목록**(`/broadcasts`)과 **작업 상태**(`/jobs`)를 추가했습니다.
 별도의 v2 화면은 제거했으며, 이전 `/v2` 링크는 해당 기존 화면으로 연결됩니다.
 
-- 방송 보관함은 기존 녹화 이력을 조회합니다. 화면을 여는 것만으로 데이터 이전이나 엔진 전환을 하지 않습니다.
+- 녹화 목록은 기존 녹화 이력을 조회합니다. 화면을 여는 것만으로 데이터 이전이나 엔진 전환을 하지 않습니다.
 - 기본 `LAR_V2_ENABLED=false`에서는 기존 녹화 엔진을 유지합니다. 영속 작업 큐의 검증·합치기·복구 요청은 비활성으로 표시되며, 기존 후처리는 운영 관리에서 확인할 수 있습니다.
 - 영속 엔진은 별도 시험용 선택 기능입니다. 저장소 표식이나 DB를 자동 생성해 켜지 않습니다. 사용 조건과 백업·복구 제한은 [영속 엔진 안내](docs/v2/README.md)를 확인하세요.
 - 소스 실행 시 `cd frontend && npm ci && npm run build`로 보관함 구성요소를 빌드합니다. Docker 빌드는 이를 포함합니다.
@@ -94,25 +119,6 @@ docker compose up -d --force-recreate
 
 업데이트 전에는 `data` 디렉터리와 필요한 녹화 파일을 백업해 두는 것을 권장합니다.
 
-## 배포 안전성
-
-`main`의 변경은 회귀 테스트, 아티팩트 다운로드 무결성 검사, Python 3.15 런타임 회귀 테스트가 모두 성공해야 Docker Hub의 `latest`와 커밋별 `sha-<40자리 SHA>` 태그로 게시됩니다. 태그나 수동 배포도 동일 커밋의 성공한 `main` 회귀 테스트가 있어야 진행됩니다. 실제 Docker Hub 게시 계정은 `compose.yaml` 및 `.env.example`의 기본 이미지 이름과 일치해야 합니다.
-
-실수로 최신 이미지를 배포해도 이전 정상 이미지로 복귀할 수 있도록 운영 환경에서는 `latest` 대신 검증된 `sha-<40자리 SHA>` 태그 또는 이미지 digest를 기록해서 사용하세요. 롤백 시 `.env`의 `LIVE_AUTO_RECORDER_IMAGE` 값을 해당 이미지로 바꾸고 `docker compose pull && docker compose up -d --force-recreate`를 실행합니다. V2/NAS 운영 전 실기기 검증은 [출시 검증 체크리스트](docs/v2/RELEASE_VALIDATION.md)를 따르세요.
-
-## 저장되는 데이터
-
-기본 구성에서는 다음 경로를 호스트에 보관합니다.
-
-```text
-data/        설정, SQLite 기록, 쿠키 및 운영 데이터
-recordings/  녹화 파일
-logs/        로그
-tmp/        임시 파일
-```
-
-특히 `data` 디렉터리는 설정과 녹화 기록이 들어 있으므로 정기적으로 백업하는 것이 좋습니다.
-
 ## 문서
 
 세부 운영 기능과 내부 구조는 아래 문서에 정리되어 있습니다.
@@ -120,7 +126,7 @@ tmp/        임시 파일
 - [운영 가이드](docs/OPERATIONS.md)
 - [프로젝트 구조](docs/ARCHITECTURE.md)
 - [보안 안내](SECURITY.md)
-- [기여 방법](CONTRIBUTING.md)
+- [기여 방법](.github/CONTRIBUTING.md)
 - [변경 내역](CHANGELOG.md)
 
 ## 라이선스

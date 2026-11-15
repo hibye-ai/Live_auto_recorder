@@ -10,7 +10,7 @@ export function Broadcasts() {
   const parameters = new URLSearchParams(search); parameters.delete('selected'); parameters.set('limit', '50');
   const query = useApiQuery<Page<Broadcast>>(`/broadcasts?${parameters}`);
   const channels = useChannelsQuery();
-  return <><PageHeading eyebrow="BROADCAST LIBRARY" title="방송 보관함" description="한 방송의 시작부터 마지막 조각까지, 함께 보관합니다." action={<a href="/files" className="button secondary"><Icon name="file"/>파일 탐색<Icon name="external" size={16}/></a>}/>
+  return <><PageHeading eyebrow="BROADCAST LIBRARY" title="녹화 목록" description="한 방송의 시작부터 마지막 조각까지, 함께 보관합니다." action={<a href="/files" className="button secondary"><Icon name="file"/>파일 탐색<Icon name="external" size={16}/></a>}/>
     <div className="filter-bar">
       <label className="search-field"><span className="sr-only">방송 제목 검색</span><Icon name="search"/><input value={search.get('query') || ''} onChange={e => update('query', e.target.value)} placeholder="방송 제목 검색" type="search"/></label>
       <div className="filter-field"><label htmlFor="broadcast-platform">플랫폼</label><select id="broadcast-platform" value={search.get('platform') || ''} onChange={e => update('platform', e.target.value)}><option value="">모든 플랫폼</option><option value="chzzk">CHZZK</option><option value="youtube">YouTube</option></select></div>
@@ -43,7 +43,7 @@ export function BroadcastDetails({ id }: { id: string }) {
     if (result) { setCreatedJob(result.job_id || result.id || null); setRequest(null); }
   };
   const ask = (next: JobRequest) => { if (!jobsAvailable || next.artifact?.controls_available === false) return; action.clear(); setCreatedJob(null); setRequest(next); };
-  return <><Link to="/broadcasts" className="back-link"><Icon name="back" size={16}/>방송 보관함</Link><ErrorNotice error={query.error} stale={Boolean(item)} onRetry={() => void query.refetch()}/>{query.isPending ? <Loading/> : item ? <>
+  return <><Link to="/broadcasts" className="back-link"><Icon name="back" size={16}/>녹화 목록</Link><ErrorNotice error={query.error} stale={Boolean(item)} onRetry={() => void query.refetch()}/>{query.isPending ? <Loading/> : item ? <>
     <PageHeading eyebrow={`${label(item.platform)} · ${item.channel_name || item.channel_id}`} title={item.title || '제목 없는 방송'} description={`${date(item.started_at)} — ${item.ended_at ? date(item.ended_at) : '종료 시각 미확인'}`} action={<Badge value={item.status}/>}/>
     <div className="broadcast-summary"><div><span>녹화 조각</span><strong>{item.segment_count ?? item.segments.length}개</strong></div><div><span>전체 길이</span><strong>{duration(item.duration_seconds)}</strong></div><div><span>파일 용량</span><strong>{bytes(item.total_size)}</strong></div><div><span>파일 검증</span><Badge value={item.validation_status || 'unverified'}/></div></div>
     {item.identity_basis === 'heuristic' && <div className="notice info"><Icon name="warning"/><div><strong>시간과 채널 정보를 바탕으로 묶은 방송입니다.</strong><p>플랫폼 방송 ID가 없어 묶음이 추정되었습니다. 합치기 전에 조각의 순서를 확인하세요.</p></div></div>}

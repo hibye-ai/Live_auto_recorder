@@ -42,7 +42,7 @@ def render_page(path: str, *, baseline: bool = False) -> str:
         'request': SimpleNamespace(session={}, url=SimpleNamespace(path=path), url_for=url_for),
         'url_for': url_for,
         'program_name': 'Live Auto Recorder', 'program_version': VERSION,
-        'page_title': '작업 상태' if path == '/jobs' else '방송 보관함',
+        'page_title': '작업 상태' if path == '/jobs' else '녹화 목록',
         'loginMode': False, 'config': {'loginMode': False, 'autoRecordingMode': False},
         'channels': [], 'account': {}, 'telegram': {}, 'error_message': '',
     }

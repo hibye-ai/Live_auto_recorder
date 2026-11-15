@@ -22,7 +22,7 @@ async function measureLayout(page:Page) {
 }
 
 for(const viewport of [{name:'desktop',width:1440,height:1050},{name:'mobile',width:360,height:800}]) {
-  for(const screen of [{name:'dashboard',path:'/',heading:'녹화 관제 보드'}, {name:'library',path:'/broadcasts',heading:'방송 보관함'}, {name:'jobs',path:'/jobs',heading:'작업 상태'}, {name:'broadcast-detail',path:'/broadcasts/broadcast-1',heading:broadcast.title}]) {
+  for(const screen of [{name:'dashboard',path:'/',heading:'녹화 대시보드'}, {name:'library',path:'/broadcasts',heading:'녹화 목록'}, {name:'jobs',path:'/jobs',heading:'작업 상태'}, {name:'broadcast-detail',path:'/broadcasts/broadcast-1',heading:broadcast.title}]) {
     test(`@preview ${screen.name} ${viewport.name}: actual v1 shell with synthetic sample data`,async({page},testInfo)=>{
       await page.setViewportSize(viewport);
       await mockConsoleApi(page);
@@ -38,6 +38,27 @@ for(const viewport of [{name:'desktop',width:1440,height:1050},{name:'mobile',wi
         await expect(page.locator('#mem-percent')).toHaveText('39');
       } else await expect(page.locator('#root.library-workspace .updated').first()).toContainText('2026');
       await page.evaluate(async()=>{await document.fonts.ready;});
+      if (viewport.name === 'desktop' && ['dashboard', 'library', 'jobs'].includes(screen.name)) {
+        if (screen.name === 'dashboard') {
+          const row = page.locator('#hist-body tr').first();
+          await expect(row.locator('td')).toHaveCount(5);
+          await expect(row.locator('td').nth(4)).toHaveText('02:55:00');
+          const geometry = await row.evaluate((tr) => {
+            const cells = Array.from(tr.querySelectorAll('td'));
+            return cells.map(cell => {
+              const box = cell.getBoundingClientRect();
+              return {left: box.left, right: box.right, client: cell.clientWidth, scroll: cell.scrollWidth};
+            });
+          });
+          for (let i = 1; i < geometry.length; i++) {
+            expect(geometry[i].left).toBeGreaterThanOrEqual(geometry[i-1].right - 1);
+          }
+          for (const i of [0, 2, 4]) expect(geometry[i].scroll).toBeLessThanOrEqual(geometry[i].client + 1);
+        }
+        const readmePath = testInfo.outputPath(`readme-${screen.name}-desktop.png`);
+        await page.screenshot({path:readmePath,fullPage:true,animations:'disabled'});
+        await testInfo.attach(`readme-${screen.name}-desktop.png`,{path:readmePath,contentType:'image/png'});
+      }
       await labelPreview(page);
       const filename=`synthetic-${screen.name}-${viewport.name}.png`;
       const path=testInfo.outputPath(filename);
