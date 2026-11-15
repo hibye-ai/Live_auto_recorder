@@ -120,7 +120,7 @@ tmp/        임시 파일
 - [운영 가이드](docs/OPERATIONS.md)
 - [프로젝트 구조](docs/ARCHITECTURE.md)
 - [보안 안내](SECURITY.md)
-- [기여 방법](CONTRIBUTING.md)
+- [기여 방법](.github/CONTRIBUTING.md)
 - [변경 내역](CHANGELOG.md)
 
 ## 라이선스
