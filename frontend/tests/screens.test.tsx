@@ -33,7 +33,7 @@ beforeAll(() => {
 });
 afterEach(()=>{cleanup();client?.clear();vi.unstubAllGlobals();});
 
-it.each([['/broadcasts','방송 보관함'],['/jobs','작업 상태'],['/broadcasts/broadcast-1',broadcast.title]])('renders the embedded %s screen without a replacement shell',async(path,title)=>{
+it.each([['/broadcasts','녹화 목록'],['/jobs','작업 상태'],['/broadcasts/broadcast-1',broadcast.title]])('renders the embedded %s screen without a replacement shell',async(path,title)=>{
   mock();mount(path);await waitFor(()=>expect(screen.getByRole('heading',{name:title,level:1})).toBeTruthy());
   expect(screen.queryByText('화면을 표시하지 못했습니다.')).toBeNull();
   expect(screen.queryByRole('navigation')).toBeNull();
@@ -50,7 +50,7 @@ it('keeps select labels separate from their option text',async()=>{
   }
 });
 it('persists search, select and UTC date filters in URL and API requests',async()=>{
-  const fetch=mock();mount('/broadcasts');await screen.findByRole('heading',{name:'방송 보관함',level:1});
+  const fetch=mock();mount('/broadcasts');await screen.findByRole('heading',{name:'녹화 목록',level:1});
   fireEvent.change(screen.getByRole('searchbox',{name:'방송 제목 검색'}),{target:{value:'가을'}});
   fireEvent.change(screen.getByLabelText('플랫폼',{exact:true}),{target:{value:'chzzk'}});
   await screen.findByRole('option',{name:channel.name});
