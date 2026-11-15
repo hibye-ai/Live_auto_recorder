@@ -6,7 +6,7 @@ test.beforeEach(async ({page}) => { await mockConsoleApi(page); });
 test('dashboard stays the original v1 page; library assets load only inside the actual console',async({page})=>{
   await page.setViewportSize({width:1440,height:1050});
   await page.goto('/');
-  await expect(page.getByRole('heading',{name:'녹화 관제 보드'})).toBeVisible();
+  await expect(page.getByRole('heading',{name:'녹화 대시보드'})).toBeVisible();
   await expect(page.locator('#root')).toHaveCount(0);
   await expect(page.locator('script[src*="/static/library/"]')).toHaveCount(0);
   await expect(page.locator('script[src*="/static/js/app.js"]')).toHaveCount(1);
@@ -14,7 +14,7 @@ test('dashboard stays the original v1 page; library assets load only inside the 
   await page.locator('#mySidenav a[href="/broadcasts"]').click();
   await expect(page).toHaveURL(/\/broadcasts$/);
   await expect(page.locator('#root.library-workspace')).toBeVisible();
-  await expect(page.locator('#root').getByRole('heading',{name:'방송 보관함',exact:true})).toBeVisible();
+  await expect(page.locator('#root').getByRole('heading',{name:'녹화 목록',exact:true})).toBeVisible();
   await expect(page.locator('.navbar')).toHaveCount(1);
   await expect(page.locator('#mySidenav')).toHaveCount(1);
   await expect(page.locator('#root .sidebar, #root .mobile-nav, #root .app-layout')).toHaveCount(0);
@@ -27,7 +27,7 @@ test('dashboard stays the original v1 page; library assets load only inside the 
   await expect(page.locator('body')).toHaveClass(/page-channels/);
   await expect(page.locator('#root')).toHaveCount(0);
   await page.locator('#mySidenav a[href="/"]').first().click();
-  await expect(page.getByRole('heading',{name:'녹화 관제 보드'})).toBeVisible();
+  await expect(page.getByRole('heading',{name:'녹화 대시보드'})).toBeVisible();
 });
 
 test('integrated screens and detail fit 360px with usable controls and no JS errors',async({page})=>{
@@ -51,7 +51,7 @@ test('mobile uses the original console menu for library and jobs',async({page})=
   await page.setViewportSize({width:360,height:800});await page.goto('/');
   await page.getByRole('button',{name:'메뉴 열기'}).click();
   await page.locator('#mySidenav a[href="/broadcasts"]').click();
-  await expect(page.locator('#root h1')).toHaveText('방송 보관함');
+  await expect(page.locator('#root h1')).toHaveText('녹화 목록');
   await page.getByRole('button',{name:'메뉴 열기'}).click();
   await page.locator('#mySidenav a[href="/jobs"]').click();
   await expect(page.locator('#root h1')).toHaveText('작업 상태');

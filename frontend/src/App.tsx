@@ -17,7 +17,7 @@ export function App() {
       link.classList.toggle('lar-active', active);
       if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
     });
-    const label = isJobs ? '작업 상태' : '방송 보관함';
+    const label = isJobs ? '작업 상태' : '녹화 목록';
     document.title = label + ' · Live Auto Recorder';
     const heading = document.querySelector('.lar-topbar-context strong');
     if (heading) heading.textContent = label;
@@ -35,7 +35,7 @@ export function App() {
   } else screen = <UnknownPage/>;
   return <><div className="library-tools"><button type="button" className="button secondary" aria-label="모든 상태 새로고침" onClick={() => void client.invalidateQueries({ queryKey: ['v2'] })}><Icon name="refresh" size={14}/>새로고침</button></div><ScreenBoundary key={path}>{screen}</ScreenBoundary></>;
 }
-function UnknownPage() { return <div className="notice error"><Icon name="warning"/><div><strong>화면을 찾을 수 없습니다.</strong><p><a href="/broadcasts">방송 보관함으로 돌아가기</a></p></div></div>; }
+function UnknownPage() { return <div className="notice error"><Icon name="warning"/><div><strong>화면을 찾을 수 없습니다.</strong><p><a href="/broadcasts">녹화 목록으로 돌아가기</a></p></div></div>; }
 class ScreenBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   state = { failed: false };
   static getDerivedStateFromError() { return { failed: true }; }

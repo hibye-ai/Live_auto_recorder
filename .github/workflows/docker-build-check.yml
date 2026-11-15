@@ -136,7 +136,7 @@ jobs:
             exit 1
           fi
           grep -qiE '<!doctype html|<html' /tmp/dashboard.html
-          grep -q '녹화 관제 보드' /tmp/dashboard.html
+          grep -q '녹화 대시보드' /tmp/dashboard.html
           grep -q '/static/js/console.js' /tmp/dashboard.html
           if grep -qE 'id="root"|/static/library/|/static/v2/' /tmp/dashboard.html; then
             echo "Root dashboard was replaced or received island-only assets"

@@ -72,7 +72,7 @@ class LibraryRouteTests(unittest.IsolatedAsyncioTestCase):
     async def test_library_pages_render_core_template_and_console_exactly_once(self):
         for enabled in ('0', '1'):
             with patch.dict(os.environ, {'LAR_V2_ENABLED': enabled}):
-                for path, title in (('/broadcasts', '방송 보관함'), ('/broadcasts/example', '방송 보관함'), ('/jobs', '작업 상태')):
+                for path, title in (('/broadcasts', '녹화 목록'), ('/broadcasts/example', '녹화 목록'), ('/jobs', '작업 상태')):
                     with self.subTest(enabled=enabled, path=path):
                         response = await self.client.get(path)
                         self.assertEqual(response.status_code, 200, response.text)

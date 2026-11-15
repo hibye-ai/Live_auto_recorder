@@ -4,7 +4,7 @@ const durable = process.env.UI_DURABLE_JOBS === 'true';
 
 test('real app preserves original routes, integrated assets, redirects and local-only API boundaries',async({page,request})=>{
   await page.goto('/');
-  await expect(page.getByRole('heading',{name:'녹화 관제 보드'})).toBeVisible();
+  await expect(page.getByRole('heading',{name:'녹화 대시보드'})).toBeVisible();
   await expect(page.locator('#root')).toHaveCount(0);
   await expect(page.locator('script[src*="/static/js/console.js"]')).toHaveCount(1);
   await expect(page.locator('script[src*="/static/library/"]')).toHaveCount(0);
@@ -44,5 +44,5 @@ test('real catalog appears inside v1 shell and durable-disabled mode cannot crea
     await page.goto('/jobs');await expect(page.locator('#root h1')).toHaveText('작업 상태');
     await expect(page.getByText('조건에 맞는 작업이 없습니다')).toBeVisible();
   }
-  await page.goto('/');await expect(page.getByRole('heading',{name:'녹화 관제 보드'})).toBeVisible();
+  await page.goto('/');await expect(page.getByRole('heading',{name:'녹화 대시보드'})).toBeVisible();
 });
