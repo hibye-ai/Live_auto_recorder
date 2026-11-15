@@ -38,6 +38,27 @@ for(const viewport of [{name:'desktop',width:1440,height:1050},{name:'mobile',wi
         await expect(page.locator('#mem-percent')).toHaveText('39');
       } else await expect(page.locator('#root.library-workspace .updated').first()).toContainText('2026');
       await page.evaluate(async()=>{await document.fonts.ready;});
+      if (viewport.name === 'desktop' && ['dashboard', 'library', 'jobs'].includes(screen.name)) {
+        if (screen.name === 'dashboard') {
+          const row = page.locator('#hist-body tr').first();
+          await expect(row.locator('td')).toHaveCount(5);
+          await expect(row.locator('td').nth(4)).toHaveText('02:55:00');
+          const geometry = await row.evaluate((tr) => {
+            const cells = Array.from(tr.querySelectorAll('td'));
+            return cells.map(cell => {
+              const box = cell.getBoundingClientRect();
+              return {left: box.left, right: box.right, client: cell.clientWidth, scroll: cell.scrollWidth};
+            });
+          });
+          for (let i = 1; i < geometry.length; i++) {
+            expect(geometry[i].left).toBeGreaterThanOrEqual(geometry[i-1].right - 1);
+          }
+          for (const i of [0, 2, 4]) expect(geometry[i].scroll).toBeLessThanOrEqual(geometry[i].client + 1);
+        }
+        const readmePath = testInfo.outputPath(`readme-${screen.name}-desktop.png`);
+        await page.screenshot({path:readmePath,fullPage:true,animations:'disabled'});
+        await testInfo.attach(`readme-${screen.name}-desktop.png`,{path:readmePath,contentType:'image/png'});
+      }
       await labelPreview(page);
       const filename=`synthetic-${screen.name}-${viewport.name}.png`;
       const path=testInfo.outputPath(filename);
