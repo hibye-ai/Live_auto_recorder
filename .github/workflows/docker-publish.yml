@@ -161,7 +161,7 @@ jobs:
             exit 1
           fi
           grep -qiE '<!doctype html|<html' /tmp/dashboard.html
-          grep -q '녹화 관제 보드' /tmp/dashboard.html
+          grep -q '녹화 대시보드' /tmp/dashboard.html
           if grep -q '<h2>로그인</h2>' /tmp/dashboard.html; then
             echo "Dashboard unexpectedly rendered the legacy login form"
             exit 1
