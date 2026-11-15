@@ -297,7 +297,7 @@ def install_v2_routes(app: Any, core: Any, *, root_dir: Path | None = None) -> N
                 'program_name': getattr(core, 'PROGRAM_NAME', 'Live Auto Recorder'),
                 'program_version': getattr(core, 'PROGRAM_VERSION', getattr(core, 'VERSION', '')),
                 'loginMode': False,
-                'page_title': '작업 상태' if request.url.path == '/jobs' else '방송 보관함',
+                'page_title': '작업 상태' if request.url.path == '/jobs' else '녹화 목록',
             },
             headers={'Cache-Control': 'no-store'},
         )

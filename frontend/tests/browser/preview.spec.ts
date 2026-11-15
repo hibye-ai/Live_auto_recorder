@@ -22,7 +22,7 @@ async function measureLayout(page:Page) {
 }
 
 for(const viewport of [{name:'desktop',width:1440,height:1050},{name:'mobile',width:360,height:800}]) {
-  for(const screen of [{name:'dashboard',path:'/',heading:'녹화 관제 보드'}, {name:'library',path:'/broadcasts',heading:'방송 보관함'}, {name:'jobs',path:'/jobs',heading:'작업 상태'}, {name:'broadcast-detail',path:'/broadcasts/broadcast-1',heading:broadcast.title}]) {
+  for(const screen of [{name:'dashboard',path:'/',heading:'녹화 대시보드'}, {name:'library',path:'/broadcasts',heading:'녹화 목록'}, {name:'jobs',path:'/jobs',heading:'작업 상태'}, {name:'broadcast-detail',path:'/broadcasts/broadcast-1',heading:broadcast.title}]) {
     test(`@preview ${screen.name} ${viewport.name}: actual v1 shell with synthetic sample data`,async({page},testInfo)=>{
       await page.setViewportSize(viewport);
       await mockConsoleApi(page);
