@@ -75,7 +75,7 @@ jobs:
           print(quote(sys.argv[1], safe=''))
           PY
               )"
-              if gh api --method DELETE "repos/${GITHUB_REPOSITORY}/git/refs/heads/${encoded}"; then
+              if delete_output="$(gh api --method DELETE "repos/${GITHUB_REPOSITORY}/git/refs/heads/${encoded}" 2>&1)"; then
                 echo "Deleted ${branch}"
                 deleted=$((deleted + 1))
               else
@@ -83,9 +83,10 @@ jobs:
                 # a confirmed absent ref; retain API and network errors otherwise.
                 status=0
                 git ls-remote --exit-code --heads origin "refs/heads/${branch}" >/dev/null || status=$?
-                if [[ "$status" -eq 2 ]]; then
+                if [[ "$status" -eq 2 && "$delete_output" == *"Reference does not exist"* && "$delete_output" == *"HTTP 422"* ]]; then
                   echo "Already deleted: ${branch}"
                 else
+                  echo "$delete_output" >&2
                   echo "::error::Failed to delete ${branch}; remote check exit code ${status}"
                   exit 1
                 fi
