@@ -2,15 +2,40 @@
 
 # Live Auto Recorder
 
-CHZZK · YouTube 라이브 자동 녹화 도구
+**좋아하는 라이브, 놓치지 않고 자동으로 기록하세요.**
 
-[![Docker pulls](https://img.shields.io/docker/pulls/yeowoonlee/live-auto-recorder?logo=docker&label=pulls)](https://hub.docker.com/r/yeowoonlee/live-auto-recorder)
+CHZZK · YouTube 라이브를 감지하고 녹화부터 보관까지 관리하는 셀프 호스팅 도구
+
+[![Docker pulls](https://img.shields.io/docker/pulls/yeowoonlee/live-auto-recorder?logo=docker&label=Docker%20pulls)](https://hub.docker.com/r/yeowoonlee/live-auto-recorder)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+[빠른 설치](#설치) · [주요 기능](#주요-기능) · [화면 미리보기](#화면-미리보기) · [운영 가이드](docs/OPERATIONS.md)
 
 </div>
 
-CHZZK와 YouTube 라이브를 자동으로 감지해서 녹화하고, 웹 화면에서 상태와 녹화 파일을 관리할 수 있는 Docker 기반 도구입니다.
+---
 
-개인 서버나 홈서버에서 계속 켜 두고 사용하는 환경을 기준으로 만들었습니다.
+개인 서버나 홈서버에서 방송을 자동으로 녹화하고, 웹 화면에서 상태와 파일을 한눈에 관리하세요.
+
+## 화면 미리보기
+
+### 대시보드
+
+녹화 현황과 저장 공간, 시스템 상태를 한눈에 확인합니다.
+
+![녹화 관제 대시보드 예시](docs/images/dashboard.png)
+
+### 방송 보관함
+
+방송별 녹화 기록과 파일, 검증 상태를 찾아볼 수 있습니다.
+
+![방송 보관함 예시](docs/images/library.png)
+
+### 작업 상태
+
+검증·합치기·복구 등 작업 상태를 확인합니다. 영속 엔진이 꺼져 있으면 관련 작업 기능은 비활성화됩니다.
+
+![작업 상태 예시](docs/images/jobs.png)
 
 ## 주요 기능
 
@@ -120,7 +145,7 @@ tmp/        임시 파일
 - [운영 가이드](docs/OPERATIONS.md)
 - [프로젝트 구조](docs/ARCHITECTURE.md)
 - [보안 안내](SECURITY.md)
-- [기여 방법](CONTRIBUTING.md)
+- [기여 방법](.github/CONTRIBUTING.md)
 - [변경 내역](CHANGELOG.md)
 
 ## 라이선스
