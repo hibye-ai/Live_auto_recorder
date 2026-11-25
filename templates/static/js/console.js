@@ -66,7 +66,27 @@
     logo: '<circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/><path d="M7.8 7.8a6 6 0 0 0 0 8.4m8.4-8.4a6 6 0 0 1 0 8.4M4.6 4.6a10.5 10.5 0 0 0 0 14.8m14.8-14.8a10.5 10.5 0 0 1 0 14.8"/>',
   };
 
+  const PIXEL_RECORDER_LOGO =
+    '<svg class="lar-pixel-logo" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">' +
+    '<rect x="1" y="4" width="14" height="1" fill="currentColor"/>' +
+    '<rect x="1" y="13" width="14" height="1" fill="currentColor"/>' +
+    '<rect x="1" y="5" width="1" height="8" fill="currentColor"/>' +
+    '<rect x="14" y="5" width="1" height="8" fill="currentColor"/>' +
+    '<rect x="3" y="6" width="4" height="1" fill="currentColor"/>' +
+    '<rect x="3" y="9" width="4" height="1" fill="currentColor"/>' +
+    '<rect x="3" y="7" width="1" height="2" fill="currentColor"/>' +
+    '<rect x="6" y="7" width="1" height="2" fill="currentColor"/>' +
+    '<rect x="9" y="6" width="4" height="1" fill="currentColor"/>' +
+    '<rect x="9" y="9" width="4" height="1" fill="currentColor"/>' +
+    '<rect x="9" y="7" width="1" height="2" fill="currentColor"/>' +
+    '<rect x="12" y="7" width="1" height="2" fill="currentColor"/>' +
+    '<rect x="7" y="8" width="2" height="1" fill="currentColor"/>' +
+    '<rect x="4" y="11" width="8" height="1" fill="currentColor"/>' +
+    '<rect x="11" y="1" width="2" height="2" fill="#e53945"/>' +
+    '</svg>';
+
   function svgIcon(name, className) {
+    if (name === "logo") return PIXEL_RECORDER_LOGO;
     const path = iconPaths[name] || iconPaths.home;
     return (
       '<svg class="' +
@@ -471,6 +491,33 @@
     const subtitle = el("p", "dash-v4-subtitle", text.subtitle);
     const heroLeft = hero.querySelector(".dash-hero-left");
     const statusline = hero.querySelector(".dash-statusline");
+    const greeting = heroLeft && heroLeft.querySelector(".dash-greeting");
+    if (heroLeft && greeting && !heroLeft.querySelector(".dash-hero-kicker")) {
+      const kicker = el("div", "dash-hero-kicker");
+      const motif = el("span", "dash-hero-motif");
+      motif.setAttribute("aria-hidden", "true");
+      motif.innerHTML =
+        '<svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">' +
+        '<rect x="1" y="4" width="14" height="1" fill="currentColor"/>' +
+        '<rect x="1" y="13" width="14" height="1" fill="currentColor"/>' +
+        '<rect x="1" y="5" width="1" height="8" fill="currentColor"/>' +
+        '<rect x="14" y="5" width="1" height="8" fill="currentColor"/>' +
+        '<rect x="3" y="6" width="4" height="1" fill="currentColor"/>' +
+        '<rect x="3" y="9" width="4" height="1" fill="currentColor"/>' +
+        '<rect x="3" y="7" width="1" height="2" fill="currentColor"/>' +
+        '<rect x="6" y="7" width="1" height="2" fill="currentColor"/>' +
+        '<rect x="9" y="6" width="4" height="1" fill="currentColor"/>' +
+        '<rect x="9" y="9" width="4" height="1" fill="currentColor"/>' +
+        '<rect x="9" y="7" width="1" height="2" fill="currentColor"/>' +
+        '<rect x="12" y="7" width="1" height="2" fill="currentColor"/>' +
+        '<rect x="7" y="8" width="2" height="1" fill="currentColor"/>' +
+        '<rect x="4" y="11" width="8" height="1" fill="currentColor"/>' +
+        '<rect x="11" y="1" width="2" height="2" fill="#e53945"/>' +
+        '</svg>';
+      greeting.parentNode.insertBefore(kicker, greeting);
+      kicker.appendChild(motif);
+      kicker.appendChild(greeting);
+    }
     if (heroLeft && statusline) heroLeft.insertBefore(subtitle, statusline);
 
     const health = el("span", "dash-v4-health", text.healthGood);
