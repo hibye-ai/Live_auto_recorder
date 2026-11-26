@@ -313,7 +313,6 @@ body.page-cookies #updateCookiesForm { padding: 20px !important; }
   body.lar-sidebar-v3 .lar-drawer-close { display: none !important; }
   body.lar-sidebar-v3 .navbar > .brand { display: none !important; }
   body.lar-sidebar-collapsed .lar-sidebar-brand-copy, body.lar-sidebar-collapsed .lar-sidebar-section-label, body.lar-sidebar-collapsed .lar-sidebar-link-copy, body.lar-sidebar-collapsed .lar-sidebar-link-arrow, body.lar-sidebar-collapsed .lar-sidebar-user-copy, body.lar-sidebar-collapsed .lar-sidebar-online, body.lar-sidebar-collapsed .lar-sidebar-logout-label { display: none !important; }
-  body.lar-sidebar-collapsed .sidenav { padding-left: 8px !important; padding-right: 8px !important; }
   body.lar-sidebar-collapsed .lar-sidebar-list { padding-top: 12px; align-items: center; }
   body.lar-sidebar-collapsed .lar-sidebar-link { width: 52px; justify-content: center; padding: 7px !important; }
   body.lar-sidebar-collapsed .lar-sidebar-user { width: 52px; justify-items: center; padding: 8px !important; }
