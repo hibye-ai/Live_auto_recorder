@@ -24,6 +24,7 @@ from lar_app.routers.recording import install_recording_history_route
 from lar_app.routers.config import install_config_backup_route
 from lar_app.routers.account import install_account_route
 from lar_app.routers.metadata import install_metadata_route
+from lar_app.routers.monitoring import install_monitoring_route, install_metrics_websocket
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -830,7 +831,6 @@ async def recording_page(request: Request, login: Any = Depends(requireLogin)):
     })
 
 
-@app.get("/status")
 async def get_status(request: Request):
     status = {}
     async with request.app.state.channels_lock:
@@ -903,8 +903,10 @@ async def get_status(request: Request):
     return status
 
 
+install_monitoring_route(app, get_status, path="/status")
+
+
 # ── 메인 대시보드용 채널 메타데이터 API ─────────────────────
-@app.get("/api/channels")
 async def api_channels(request: Request, login: Any = Depends(requireLogin)):
     async with request.app.state.channels_lock:
         chs = [dict(c) for c in request.app.state.channels]
@@ -922,7 +924,9 @@ async def api_channels(request: Request, login: Any = Depends(requireLogin)):
     return safe
 
 
-@app.get("/api/check_status/{channel_id}")
+install_monitoring_route(app, api_channels, path="/api/channels")
+
+
 async def api_check_status(request: Request, channel_id: str, login: Any = Depends(requireLogin)):
     try:
         async with request.app.state.channels_lock:
@@ -1028,6 +1032,9 @@ async def api_check_status(request: Request, channel_id: str, login: Any = Depen
         return JSONResponse(content={'status': 'error', 'message': str(e)}, status_code=500)
 
 
+install_monitoring_route(app, api_check_status, path="/api/check_status/{channel_id}")
+
+
 # 치지직 및 유튜브 메타데이터 통합 API
 async def update_metadata(channel_id: str, request: Request, login: Any = Depends(requireLogin)):
     # 1) channel 스냅샷
@@ -1090,7 +1097,6 @@ install_metadata_route(app, api_thumbnail_status, path="/api/thumbnail_status")
 
 
 # 웹 대시보드에 매트릭 API
-@app.get("/api/sys_metrics")
 async def api_sys_metrics():
     try:
         # CPU: 첫 호출 0% 이슈 회피 (interval>0)  :contentReference[oaicite:4]{index=4}
@@ -1194,6 +1200,9 @@ async def api_sys_metrics():
 
 
 # 메인 페이지 라우트
+install_monitoring_route(app, api_sys_metrics, path="/api/sys_metrics")
+
+
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     config = request.app.state.config
@@ -1597,7 +1606,6 @@ async def api_file_cleanup(request: Request, login: Any = Depends(requireLogin))
 # ── #6: WebSocket 실시간 대시보드 ────────────────────────────
 from starlette.websockets import WebSocket, WebSocketDisconnect
 
-@app.websocket("/ws/sys_metrics")
 async def ws_sys_metrics(websocket: WebSocket):
     """실시간 시스템 메트릭 WebSocket (2초 간격 푸시)."""
     await websocket.accept()
@@ -1665,6 +1673,9 @@ async def ws_sys_metrics(websocket: WebSocket):
         pass
     except Exception:
         pass
+
+
+install_metrics_websocket(app, ws_sys_metrics)
 
 
 # runUvicorn 서버실행 함수
