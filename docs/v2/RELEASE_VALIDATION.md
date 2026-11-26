@@ -41,6 +41,42 @@ production volume to satisfy a checklist.
 
 ## Evidence and release decision
 
+For each candidate, resolve the immutable OCI index and platform manifests before
+testing (replace the example image and SHA with the candidate):
+
+```sh
+IMAGE=yeowoonlee/live-auto-recorder
+SHA=<candidate-commit-sha>
+docker buildx imagetools inspect "$IMAGE:sha-$SHA"
+```
+
+Record the index digest and the `linux/amd64` and `linux/arm64` manifest
+digests from the output. Verify they belong to the candidate build, then use
+`$IMAGE@sha256:<platform-manifest-digest>` on each corresponding disposable
+host; record the exact reference used and host architecture. A tag can move, and
+an index digest alone does not identify which platform manifest was tested. Retain
+the previous verified image digest separately for rollback. Do not treat an
+emulated build or a digest lookup as a physical-device test.
+
+In the private evidence log, make one entry per host, provider and scenario:
+candidate commit, index and platform digest, exact image reference, UTC start/end,
+operator, environment and authorization, procedure, observed result and
+pass/fail, sanitized logs and artifact references. For provider flows record
+start, stop, reconnect, verify and merge separately, including FFprobe duration
+and original hashes before and after. For failure and restore scenarios record
+the injected boundary, recovery and reconciliation observations, database
+integrity/foreign-key results and original hashes. For the soak retain hourly
+measurements. Mark unperformed steps pending; record approval and attach only
+sanitized evidence after review, keeping credentials and private paths out.
+
+For a quick local regression before scheduling hardware, run the existing
+`scripts/check_v2_readiness.py` against disposable paths, the repository and
+worker tests, and `python scripts/smoke_v2_media.py` with FFmpeg/FFprobe on PATH.
+These use synthetic fixtures and do not satisfy any real-device gate. The
+snapshot restore regression in `tests/test_v2_repository.py` restores a V2
+database into a temporary directory; it does not rehearse a service restart or
+the representative v1/v2 restore and rollback required above.
+
 Keep a separate, private evidence log containing the test timestamp, image
 digest, exact host architecture, procedure, outcome, sanitized excerpts,
 resource measurements, and operator approval. Mark every scenario pass/fail;
