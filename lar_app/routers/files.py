@@ -12,6 +12,11 @@ from fastapi.responses import HTMLResponse
 from module.file_manager import validateBasename
 
 
+def install_legacy_file_cleanup(app: Any, endpoint: Any) -> None:
+    """Register the existing retention handler at its original position."""
+    app.add_api_route('/api/file_cleanup', endpoint, methods=['POST'])
+
+
 def install_file_routes(app: Any, core: Any) -> None:
     """Register file-manager page/API routes using the legacy domain helpers."""
 
