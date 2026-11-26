@@ -21,6 +21,7 @@ from typing import Optional, Any, List, Dict, Literal, TypedDict
 
 from module.recording_history import get_history, get_stats as get_recording_stats
 from lar_app.routers.recording import install_recording_history_route
+from lar_app.routers.config import install_config_backup_route
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -1394,7 +1395,6 @@ async def api_recording_history(
 install_recording_history_route(app, api_recording_history)
 
 # ── #4: 설정 백업/복원 API ───────────────────────────────────
-@app.get("/api/config_export")
 async def api_config_export(login: Any = Depends(requireLogin)):
     """전체 설정 + 채널 목록 JSON 백업."""
     try:
@@ -1421,7 +1421,9 @@ async def api_config_export(login: Any = Depends(requireLogin)):
         return JSONResponse(content={"status": "error", "message": "설정 백업 파일을 생성하지 못했습니다."}, status_code=500)
 
 
-@app.post("/api/config_import")
+install_config_backup_route(app, api_config_export, method="GET")
+
+
 async def api_config_import(request: Request, login: Any = Depends(requireLogin)):
     """JSON 백업 파일로 설정 복원."""
     from module.v2_runtime import enabled as v2_enabled
@@ -1469,6 +1471,9 @@ async def api_config_import(request: Request, login: Any = Depends(requireLogin)
         return JSONResponse(content={"status": "error", "message": "유효하지 않은 백업 파일입니다."}, status_code=400)
     except Exception:
         return JSONResponse(content={"status": "error", "message": "설정을 복원하지 못했습니다."}, status_code=500)
+
+
+install_config_backup_route(app, api_config_import, method="POST")
 
 
 # ── #5: 파일 정리 (Retention) API ────────────────────────────

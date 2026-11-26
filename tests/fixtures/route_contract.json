@@ -1,0 +1,1330 @@
+[
+  {
+    "path": "/recording",
+    "methods": [
+      "GET"
+    ],
+    "name": "recording_page",
+    "endpoint": "live_auto_recorder.recording_page",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/status",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_status",
+    "endpoint": "live_auto_recorder.get_status",
+    "dependencies": []
+  },
+  {
+    "path": "/api/channels",
+    "methods": [
+      "GET"
+    ],
+    "name": "api_channels",
+    "endpoint": "live_auto_recorder.api_channels",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/check_status/{channel_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "api_check_status",
+    "endpoint": "live_auto_recorder.api_check_status",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/update_metadata/{channel_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "update_metadata",
+    "endpoint": "live_auto_recorder.update_metadata",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/thumbnail_status",
+    "methods": [
+      "GET"
+    ],
+    "name": "api_thumbnail_status",
+    "endpoint": "live_auto_recorder.api_thumbnail_status",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/sys_metrics",
+    "methods": [
+      "GET"
+    ],
+    "name": "api_sys_metrics",
+    "endpoint": "live_auto_recorder.api_sys_metrics",
+    "dependencies": []
+  },
+  {
+    "path": "/",
+    "methods": [
+      "GET"
+    ],
+    "name": "index",
+    "endpoint": "live_auto_recorder.index",
+    "dependencies": []
+  },
+  {
+    "path": "/login",
+    "methods": [
+      "POST"
+    ],
+    "name": "login",
+    "endpoint": "live_auto_recorder.login",
+    "dependencies": []
+  },
+  {
+    "path": "/logout",
+    "methods": [
+      "GET"
+    ],
+    "name": "logout",
+    "endpoint": "live_auto_recorder.logout",
+    "dependencies": []
+  },
+  {
+    "path": "/register",
+    "methods": [
+      "GET"
+    ],
+    "name": "register_page",
+    "endpoint": "live_auto_recorder.register_page",
+    "dependencies": []
+  },
+  {
+    "path": "/register",
+    "methods": [
+      "POST"
+    ],
+    "name": "register",
+    "endpoint": "live_auto_recorder.register",
+    "dependencies": []
+  },
+  {
+    "path": "/updateAccount",
+    "methods": [
+      "POST"
+    ],
+    "name": "updateAccount",
+    "endpoint": "live_auto_recorder.updateAccount",
+    "dependencies": []
+  },
+  {
+    "path": "/user_info",
+    "methods": [
+      "GET"
+    ],
+    "name": "user_info",
+    "endpoint": "live_auto_recorder.user_info",
+    "dependencies": []
+  },
+  {
+    "path": "/api/test_telegram",
+    "methods": [
+      "GET"
+    ],
+    "name": "testTelegram",
+    "endpoint": "live_auto_recorder.testTelegram",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/recording_history",
+    "methods": [
+      "GET"
+    ],
+    "name": "api_recording_history",
+    "endpoint": "live_auto_recorder.api_recording_history",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/config_export",
+    "methods": [
+      "GET"
+    ],
+    "name": "api_config_export",
+    "endpoint": "live_auto_recorder.api_config_export",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/config_import",
+    "methods": [
+      "POST"
+    ],
+    "name": "api_config_import",
+    "endpoint": "live_auto_recorder.api_config_import",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/file_cleanup",
+    "methods": [
+      "POST"
+    ],
+    "name": "api_file_cleanup",
+    "endpoint": "live_auto_recorder.api_file_cleanup",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/ws/sys_metrics",
+    "methods": [
+      "WEBSOCKET"
+    ],
+    "name": "ws_sys_metrics",
+    "endpoint": "live_auto_recorder.ws_sys_metrics",
+    "dependencies": []
+  },
+  {
+    "path": "/channels",
+    "methods": [
+      "GET"
+    ],
+    "name": "channels_page",
+    "endpoint": "lar_app.routers.channels.install_channel_routes.<locals>.channels_page",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/channels",
+    "methods": [
+      "POST"
+    ],
+    "name": "add_channel",
+    "endpoint": "lar_app.routers.channels.install_channel_routes.<locals>.add_channel",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/channels/{channel_id}",
+    "methods": [
+      "PUT"
+    ],
+    "name": "edit_channel",
+    "endpoint": "lar_app.routers.channels.install_channel_routes.<locals>.edit_channel",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/channels/{channel_id}",
+    "methods": [
+      "DELETE"
+    ],
+    "name": "delete_channel",
+    "endpoint": "lar_app.routers.channels.install_channel_routes.<locals>.delete_channel",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/save_chzzk_cookies",
+    "methods": [
+      "POST"
+    ],
+    "name": "save_chzzk_cookies",
+    "endpoint": "lar_app.routers.cookies.install_cookie_routes.<locals>.save_chzzk_cookies",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/save_youtube_cookie_file",
+    "methods": [
+      "POST"
+    ],
+    "name": "save_youtube_cookie_file",
+    "endpoint": "lar_app.routers.cookies.install_cookie_routes.<locals>.save_youtube_cookie_file",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/cookies",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_cookies",
+    "endpoint": "lar_app.routers.cookies.install_cookie_routes.<locals>.get_cookies",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/cookies",
+    "methods": [
+      "POST"
+    ],
+    "name": "update_cookies",
+    "endpoint": "lar_app.routers.cookies.install_cookie_routes.<locals>.update_cookies",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/save_config",
+    "methods": [
+      "POST"
+    ],
+    "name": "save_config_api",
+    "endpoint": "lar_app.routers.config.install_config_routes.<locals>.save_config_api",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/test_telegram",
+    "methods": [
+      "GET"
+    ],
+    "name": "testTelegram",
+    "endpoint": "lar_app.routers.config.install_config_routes.<locals>.testTelegram",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/config",
+    "methods": [
+      "GET"
+    ],
+    "name": "configPage",
+    "endpoint": "lar_app.routers.config.install_config_routes.<locals>.configPage",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/config",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_config_api",
+    "endpoint": "lar_app.routers.config.install_config_routes.<locals>.get_config_api",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/config",
+    "methods": [
+      "POST"
+    ],
+    "name": "updateConfig",
+    "endpoint": "lar_app.routers.config.install_config_routes.<locals>.updateConfig",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/get_config",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_config",
+    "endpoint": "lar_app.routers.config.install_config_routes.<locals>.get_config",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/discord_test",
+    "methods": [
+      "POST"
+    ],
+    "name": "api_discord_test",
+    "endpoint": "lar_app.routers.config.install_config_routes.<locals>.api_discord_test",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/files",
+    "methods": [
+      "GET"
+    ],
+    "name": "files_page",
+    "endpoint": "lar_app.routers.files.install_file_routes.<locals>.files_page",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/files/usage",
+    "methods": [
+      "GET"
+    ],
+    "name": "api_files_usage",
+    "endpoint": "lar_app.routers.files.install_file_routes.<locals>.api_files_usage",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/files/list",
+    "methods": [
+      "GET"
+    ],
+    "name": "api_files_list",
+    "endpoint": "lar_app.routers.files.install_file_routes.<locals>.api_files_list",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/files/roots",
+    "methods": [
+      "GET"
+    ],
+    "name": "api_files_roots",
+    "endpoint": "lar_app.routers.files.install_file_routes.<locals>.api_files_roots",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/files/ls",
+    "methods": [
+      "GET"
+    ],
+    "name": "api_files_ls",
+    "endpoint": "lar_app.routers.files.install_file_routes.<locals>.api_files_ls",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/files/disk-usage",
+    "methods": [
+      "GET"
+    ],
+    "name": "api_files_disk_usage",
+    "endpoint": "lar_app.routers.files.install_file_routes.<locals>.api_files_disk_usage",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/files/download",
+    "methods": [
+      "GET"
+    ],
+    "name": "api_files_download",
+    "endpoint": "lar_app.routers.files.install_file_routes.<locals>.api_files_download",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/files/mkdir",
+    "methods": [
+      "POST"
+    ],
+    "name": "api_files_mkdir",
+    "endpoint": "lar_app.routers.files.install_file_routes.<locals>.api_files_mkdir",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/files/rename",
+    "methods": [
+      "POST"
+    ],
+    "name": "api_files_rename",
+    "endpoint": "lar_app.routers.files.install_file_routes.<locals>.api_files_rename",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/files/move",
+    "methods": [
+      "POST"
+    ],
+    "name": "api_files_move",
+    "endpoint": "lar_app.routers.files.install_file_routes.<locals>.api_files_move",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/files/delete",
+    "methods": [
+      "POST"
+    ],
+    "name": "api_files_delete",
+    "endpoint": "lar_app.routers.files.install_file_routes.<locals>.api_files_delete",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/files/streamcopy",
+    "methods": [
+      "POST"
+    ],
+    "name": "api_files_streamcopy",
+    "endpoint": "lar_app.routers.files.install_file_routes.<locals>.api_files_streamcopy",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/start_recording/{channel_id}",
+    "methods": [
+      "POST"
+    ],
+    "name": "api_start_recording",
+    "endpoint": "lar_app.routers.recording.install_recording_routes.<locals>.api_start_recording",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/stop_recording/{channel_id}",
+    "methods": [
+      "POST"
+    ],
+    "name": "api_stop_recording",
+    "endpoint": "lar_app.routers.recording.install_recording_routes.<locals>.api_stop_recording",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/start_all_recording",
+    "methods": [
+      "POST"
+    ],
+    "name": "api_start_all_recording",
+    "endpoint": "lar_app.routers.recording.install_recording_routes.<locals>.api_start_all_recording",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/stop_all_recording",
+    "methods": [
+      "POST"
+    ],
+    "name": "api_stop_all_recording",
+    "endpoint": "lar_app.routers.recording.install_recording_routes.<locals>.api_stop_all_recording",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/toggle_record_enabled/{channel_id}",
+    "methods": [
+      "POST"
+    ],
+    "name": "toggle_record_enabled",
+    "endpoint": "lar_app.routers.recording.install_recording_routes.<locals>.toggle_record_enabled",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/api/v2/channels",
+    "methods": [
+      "GET"
+    ],
+    "name": "channels",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.channels",
+    "dependencies": [
+      "live_auto_recorder.requireLogin",
+      "lar_app.routers.v2.install_v2_routes.<locals>.available"
+    ]
+  },
+  {
+    "path": "/api/v2/channels/{channel_id}",
+    "methods": [
+      "PATCH"
+    ],
+    "name": "patch_channel",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.patch_channel",
+    "dependencies": [
+      "live_auto_recorder.requireLogin",
+      "lar_app.routers.v2.install_v2_routes.<locals>.available"
+    ]
+  },
+  {
+    "path": "/api/v2/channels/{channel_id}/commands",
+    "methods": [
+      "POST"
+    ],
+    "name": "command",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.command",
+    "dependencies": [
+      "live_auto_recorder.requireLogin",
+      "lar_app.routers.v2.install_v2_routes.<locals>.available"
+    ]
+  },
+  {
+    "path": "/api/v2/commands/{command_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_command",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.get_command",
+    "dependencies": [
+      "live_auto_recorder.requireLogin",
+      "lar_app.routers.v2.install_v2_routes.<locals>.available"
+    ]
+  },
+  {
+    "path": "/api/v2/broadcasts",
+    "methods": [
+      "GET"
+    ],
+    "name": "broadcasts",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.broadcasts",
+    "dependencies": [
+      "live_auto_recorder.requireLogin",
+      "lar_app.routers.v2.install_v2_routes.<locals>.available"
+    ]
+  },
+  {
+    "path": "/api/v2/broadcasts/{broadcast_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "broadcast",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.broadcast",
+    "dependencies": [
+      "live_auto_recorder.requireLogin",
+      "lar_app.routers.v2.install_v2_routes.<locals>.available"
+    ]
+  },
+  {
+    "path": "/api/v2/jobs",
+    "methods": [
+      "GET"
+    ],
+    "name": "jobs",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.jobs",
+    "dependencies": [
+      "live_auto_recorder.requireLogin",
+      "lar_app.routers.v2.install_v2_routes.<locals>.available"
+    ]
+  },
+  {
+    "path": "/api/v2/jobs/{job_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "job",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.job",
+    "dependencies": [
+      "live_auto_recorder.requireLogin",
+      "lar_app.routers.v2.install_v2_routes.<locals>.available"
+    ]
+  },
+  {
+    "path": "/api/v2/jobs",
+    "methods": [
+      "POST"
+    ],
+    "name": "create_job",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.create_job",
+    "dependencies": [
+      "live_auto_recorder.requireLogin",
+      "lar_app.routers.v2.install_v2_routes.<locals>.available"
+    ]
+  },
+  {
+    "path": "/api/v2/jobs/{job_id}/cancel",
+    "methods": [
+      "POST"
+    ],
+    "name": "cancel",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.cancel",
+    "dependencies": [
+      "live_auto_recorder.requireLogin",
+      "lar_app.routers.v2.install_v2_routes.<locals>.available"
+    ]
+  },
+  {
+    "path": "/api/v2/jobs/{job_id}/retry",
+    "methods": [
+      "POST"
+    ],
+    "name": "retry",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.retry",
+    "dependencies": [
+      "live_auto_recorder.requireLogin",
+      "lar_app.routers.v2.install_v2_routes.<locals>.available"
+    ]
+  },
+  {
+    "path": "/api/v2/status",
+    "methods": [
+      "GET"
+    ],
+    "name": "status",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.status",
+    "dependencies": [
+      "live_auto_recorder.requireLogin",
+      "lar_app.routers.v2.install_v2_routes.<locals>.available"
+    ]
+  },
+  {
+    "path": "/api/v2/settings",
+    "methods": [
+      "GET"
+    ],
+    "name": "settings",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.settings",
+    "dependencies": [
+      "live_auto_recorder.requireLogin",
+      "lar_app.routers.v2.install_v2_routes.<locals>.available"
+    ]
+  },
+  {
+    "path": "/broadcasts",
+    "methods": [
+      "GET"
+    ],
+    "name": "library_page",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.library_page",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/broadcasts/{broadcast_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "library_page",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.library_page",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/jobs",
+    "methods": [
+      "GET"
+    ],
+    "name": "library_page",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.library_page",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/v2",
+    "methods": [
+      "GET"
+    ],
+    "name": "legacy_ui",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.legacy_ui",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/v2/channels",
+    "methods": [
+      "GET"
+    ],
+    "name": "legacy_ui",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.legacy_ui",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/v2/settings",
+    "methods": [
+      "GET"
+    ],
+    "name": "legacy_ui",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.legacy_ui",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/v2/broadcasts",
+    "methods": [
+      "GET"
+    ],
+    "name": "legacy_ui",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.legacy_ui",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/v2/jobs",
+    "methods": [
+      "GET"
+    ],
+    "name": "legacy_ui",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.legacy_ui",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/v2/broadcasts/{broadcast_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "legacy_broadcast",
+    "endpoint": "lar_app.routers.v2.install_v2_routes.<locals>.legacy_broadcast",
+    "dependencies": [
+      "live_auto_recorder.requireLogin"
+    ]
+  },
+  {
+    "path": "/healthz",
+    "methods": [
+      "GET"
+    ],
+    "name": "healthz",
+    "endpoint": "lar_app.bootstrap._install_health_route.<locals>.healthz",
+    "dependencies": []
+  },
+  {
+    "path": "/operations",
+    "methods": [
+      "GET"
+    ],
+    "name": "operations_page",
+    "endpoint": "module.operations_v2.install_operations.<locals>.operations_page",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/summary",
+    "methods": [
+      "GET"
+    ],
+    "name": "summary",
+    "endpoint": "module.operations_v2.install_operations.<locals>.summary",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/settings",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_settings",
+    "endpoint": "module.operations_v2.install_operations.<locals>.get_settings",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/settings",
+    "methods": [
+      "PUT"
+    ],
+    "name": "put_settings",
+    "endpoint": "module.operations_v2.install_operations.<locals>.put_settings",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/health",
+    "methods": [
+      "GET"
+    ],
+    "name": "health",
+    "endpoint": "module.operations_v2.install_operations.<locals>.health",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/storage/runway",
+    "methods": [
+      "GET"
+    ],
+    "name": "storage_runway",
+    "endpoint": "module.operations_v2.install_operations.<locals>.storage_runway",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/diagnostics",
+    "methods": [
+      "GET"
+    ],
+    "name": "diagnostics",
+    "endpoint": "module.operations_v2.install_operations.<locals>.diagnostics",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/database",
+    "methods": [
+      "GET"
+    ],
+    "name": "database_health",
+    "endpoint": "module.operations_v2.install_operations.<locals>.database_health",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/database/backups",
+    "methods": [
+      "GET"
+    ],
+    "name": "database_backups",
+    "endpoint": "module.operations_v2.install_operations.<locals>.database_backups",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/database/backups",
+    "methods": [
+      "POST"
+    ],
+    "name": "create_database_backup",
+    "endpoint": "module.operations_v2.install_operations.<locals>.create_database_backup",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/version",
+    "methods": [
+      "GET"
+    ],
+    "name": "version_status",
+    "endpoint": "module.operations_v2.install_operations.<locals>.version_status",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/cookies/health",
+    "methods": [
+      "GET"
+    ],
+    "name": "cookie_health",
+    "endpoint": "module.operations_v2.install_operations.<locals>.cookie_health",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/metrics/channels",
+    "methods": [
+      "GET"
+    ],
+    "name": "channel_metrics",
+    "endpoint": "module.operations_v2.install_operations.<locals>.channel_metrics",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/channels/{channel_id}/trace",
+    "methods": [
+      "GET"
+    ],
+    "name": "channel_trace",
+    "endpoint": "module.operations_v2.install_operations.<locals>.channel_trace",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/channels/{channel_id}/recover",
+    "methods": [
+      "POST"
+    ],
+    "name": "recover_channel",
+    "endpoint": "module.operations_v2.install_operations.<locals>.recover_channel",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/channels/{channel_id}/schedule",
+    "methods": [
+      "GET"
+    ],
+    "name": "channel_schedule",
+    "endpoint": "module.operations_v2.install_operations.<locals>.channel_schedule",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/channels/{channel_id}/schedule",
+    "methods": [
+      "PUT"
+    ],
+    "name": "put_channel_schedule",
+    "endpoint": "module.operations_v2.install_operations.<locals>.put_channel_schedule",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/channels/{channel_id}/health-settings",
+    "methods": [
+      "GET"
+    ],
+    "name": "channel_health_settings",
+    "endpoint": "module.operations_v2.install_operations.<locals>.channel_health_settings",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/channels/{channel_id}/health-settings",
+    "methods": [
+      "PUT"
+    ],
+    "name": "put_channel_health_settings",
+    "endpoint": "module.operations_v2.install_operations.<locals>.put_channel_health_settings",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/files/protection",
+    "methods": [
+      "PUT"
+    ],
+    "name": "file_protection",
+    "endpoint": "module.operations_v2.install_operations.<locals>.file_protection",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/jobs",
+    "methods": [
+      "GET"
+    ],
+    "name": "jobs",
+    "endpoint": "module.operations_v2.install_operations.<locals>.jobs",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/jobs/{job_id}/retry",
+    "methods": [
+      "POST"
+    ],
+    "name": "retry_job",
+    "endpoint": "module.operations_v2.install_operations.<locals>.retry_job",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/jobs/{job_id}/cancel",
+    "methods": [
+      "POST"
+    ],
+    "name": "cancel_job",
+    "endpoint": "module.operations_v2.install_operations.<locals>.cancel_job",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/cleanup/preview",
+    "methods": [
+      "POST"
+    ],
+    "name": "cleanup_preview",
+    "endpoint": "module.operations_v2.install_operations.<locals>.cleanup_preview",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/cleanup/run",
+    "methods": [
+      "POST"
+    ],
+    "name": "cleanup_run",
+    "endpoint": "module.operations_v2.install_operations.<locals>.cleanup_run",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/backups",
+    "methods": [
+      "GET"
+    ],
+    "name": "backups",
+    "endpoint": "module.operations_v2.install_operations.<locals>.backups",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/backups",
+    "methods": [
+      "POST"
+    ],
+    "name": "create_backup",
+    "endpoint": "module.operations_v2.install_operations.<locals>.create_backup",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/backups/{name}/download",
+    "methods": [
+      "GET"
+    ],
+    "name": "download_backup",
+    "endpoint": "module.operations_v2.install_operations.<locals>.download_backup",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/backups/{name}/restore",
+    "methods": [
+      "POST"
+    ],
+    "name": "restore_backup",
+    "endpoint": "module.operations_v2.install_operations.<locals>.restore_backup",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/statistics",
+    "methods": [
+      "GET"
+    ],
+    "name": "statistics",
+    "endpoint": "module.operations_v2.install_operations.<locals>.statistics",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/statistics.csv",
+    "methods": [
+      "GET"
+    ],
+    "name": "statistics_csv",
+    "endpoint": "module.operations_v2.install_operations.<locals>.statistics_csv",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/rules/{channel_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_rule",
+    "endpoint": "module.operations_v2.install_operations.<locals>.get_rule",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/rules/{channel_id}",
+    "methods": [
+      "PUT"
+    ],
+    "name": "put_rule",
+    "endpoint": "module.operations_v2.install_operations.<locals>.put_rule",
+    "dependencies": []
+  },
+  {
+    "path": "/api/operations/audit",
+    "methods": [
+      "GET"
+    ],
+    "name": "audit",
+    "endpoint": "module.operations_v2.install_operations.<locals>.audit",
+    "dependencies": []
+  },
+  {
+    "path": "/api/v3/recordings",
+    "methods": [
+      "GET"
+    ],
+    "name": "recordings",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.recordings",
+    "dependencies": []
+  },
+  {
+    "path": "/api/v3/recordings/{recording_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "recording",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.recording",
+    "dependencies": []
+  },
+  {
+    "path": "/api/v3/broadcasts",
+    "methods": [
+      "GET"
+    ],
+    "name": "broadcasts",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.broadcasts",
+    "dependencies": []
+  },
+  {
+    "path": "/api/v3/broadcasts/{broadcast_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "broadcast",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.broadcast",
+    "dependencies": []
+  },
+  {
+    "path": "/api/v3/broadcasts/{broadcast_id}/merge",
+    "methods": [
+      "POST"
+    ],
+    "name": "merge_segments",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.merge_segments",
+    "dependencies": []
+  },
+  {
+    "path": "/api/v3/recordings/{recording_id}/verify",
+    "methods": [
+      "POST"
+    ],
+    "name": "verify",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.verify",
+    "dependencies": []
+  },
+  {
+    "path": "/api/v3/recordings/{recording_id}/archive",
+    "methods": [
+      "POST"
+    ],
+    "name": "archive",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.archive",
+    "dependencies": []
+  },
+  {
+    "path": "/api/v3/archive-jobs",
+    "methods": [
+      "GET"
+    ],
+    "name": "archive_jobs",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.archive_jobs",
+    "dependencies": []
+  },
+  {
+    "path": "/api/v3/platform/settings",
+    "methods": [
+      "GET"
+    ],
+    "name": "settings",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.settings",
+    "dependencies": []
+  },
+  {
+    "path": "/api/v3/platform/settings",
+    "methods": [
+      "PUT"
+    ],
+    "name": "put_settings",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.put_settings",
+    "dependencies": []
+  },
+  {
+    "path": "/api/v3/notifications",
+    "methods": [
+      "GET"
+    ],
+    "name": "notifications",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.notifications",
+    "dependencies": []
+  },
+  {
+    "path": "/api/v3/notifications/{notification_id}/retry",
+    "methods": [
+      "POST"
+    ],
+    "name": "retry_notification",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.retry_notification",
+    "dependencies": []
+  },
+  {
+    "path": "/api/v3/tokens",
+    "methods": [
+      "GET"
+    ],
+    "name": "tokens",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.tokens",
+    "dependencies": []
+  },
+  {
+    "path": "/api/v3/tokens",
+    "methods": [
+      "POST"
+    ],
+    "name": "create_token",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.create_token",
+    "dependencies": []
+  },
+  {
+    "path": "/api/v3/tokens/{token_id}",
+    "methods": [
+      "DELETE"
+    ],
+    "name": "revoke_token",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.revoke_token",
+    "dependencies": []
+  },
+  {
+    "path": "/api/v3/automation/status",
+    "methods": [
+      "GET"
+    ],
+    "name": "api_status",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.api_status",
+    "dependencies": [
+      "module.operations_platform_v3.install_platform_features.<locals>.automation_read"
+    ]
+  },
+  {
+    "path": "/api/v3/automation/recordings",
+    "methods": [
+      "GET"
+    ],
+    "name": "api_recordings",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.api_recordings",
+    "dependencies": [
+      "module.operations_platform_v3.install_platform_features.<locals>.automation_read"
+    ]
+  },
+  {
+    "path": "/api/v3/automation/channels/{channel_id}/start",
+    "methods": [
+      "POST"
+    ],
+    "name": "api_start",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.api_start",
+    "dependencies": [
+      "module.operations_platform_v3.install_platform_features.<locals>.automation_control"
+    ]
+  },
+  {
+    "path": "/api/v3/automation/channels/{channel_id}/stop",
+    "methods": [
+      "POST"
+    ],
+    "name": "api_stop",
+    "endpoint": "module.operations_platform_v3.install_platform_features.<locals>.api_stop",
+    "dependencies": [
+      "module.operations_platform_v3.install_platform_features.<locals>.automation_control"
+    ]
+  },
+  {
+    "path": "/api/config-tools/path-check",
+    "methods": [
+      "POST"
+    ],
+    "name": "config_path_check",
+    "endpoint": "module.config_tools_v1.install_config_tools.<locals>.config_path_check",
+    "dependencies": []
+  },
+  {
+    "path": "/api/config-tools/encoders",
+    "methods": [
+      "GET"
+    ],
+    "name": "config_encoder_check",
+    "endpoint": "module.config_tools_v1.install_config_tools.<locals>.config_encoder_check",
+    "dependencies": []
+  },
+  {
+    "path": "/readyz",
+    "methods": [
+      "GET"
+    ],
+    "name": "readyz",
+    "endpoint": "lar_app.bootstrap._install_readiness_route.<locals>.readyz",
+    "dependencies": []
+  }
+]
