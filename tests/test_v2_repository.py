@@ -4,6 +4,7 @@ import concurrent.futures
 import hashlib
 import json
 import os
+import shutil
 import sqlite3
 import tempfile
 import unittest
@@ -277,6 +278,26 @@ class RepositoryTests(unittest.TestCase):
             V2Repository(backup).initialize()
         self.assertEqual(before, backup.read_bytes())
         self.assertFalse(Path(str(backup) + '-wal').exists())
+
+    def test_snapshot_restores_domain_and_preserves_original(self):
+        artifact = self.domain()
+        media = self.root / 'a.ts'
+        media.write_bytes(b'disposable original media')
+        original_hash = hashlib.sha256(media.read_bytes()).hexdigest()
+        job = self.repo.create_job('verify', 'a', input_revision=artifact['revision'])
+        snapshot = self.root / 'snapshot.sqlite3'
+        report = self.repo.backup(snapshot)
+        restored_path = self.root / 'restore' / 'v2.sqlite3'
+        restored_path.parent.mkdir()
+        shutil.copyfile(snapshot, restored_path)
+        self.assertEqual(hashlib.sha256(restored_path.read_bytes()).hexdigest(), report['sha256'])
+        restored = V2Repository(restored_path, clock=self.clock)
+        restored.initialize()
+        self.assertTrue(restored.integrity_check()['ok'])
+        self.assertEqual(restored.get_broadcast('b')['channel_id'], 'c')
+        self.assertEqual(restored.get_artifact('a')['relative_path'], 'a.ts')
+        self.assertEqual(restored.get_job(job['id'])['state'], 'queued')
+        self.assertEqual(hashlib.sha256(media.read_bytes()).hexdigest(), original_hash)
 
     def test_disk_full_before_commit_rolls_back_job_and_idempotency_key(self):
         original = self.repo._connect
