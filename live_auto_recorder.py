@@ -23,6 +23,7 @@ from module.recording_history import get_history, get_stats as get_recording_sta
 from lar_app.routers.recording import install_recording_history_route
 from lar_app.routers.config import install_config_backup_route
 from lar_app.routers.account import install_account_route
+from lar_app.routers.metadata import install_metadata_route
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -1028,7 +1029,6 @@ async def api_check_status(request: Request, channel_id: str, login: Any = Depen
 
 
 # 치지직 및 유튜브 메타데이터 통합 API
-@app.get("/api/update_metadata/{channel_id}")
 async def update_metadata(channel_id: str, request: Request, login: Any = Depends(requireLogin)):
     # 1) channel 스냅샷
     async with request.app.state.channels_lock:
@@ -1063,8 +1063,10 @@ async def update_metadata(channel_id: str, request: Request, login: Any = Depend
     })
 
 
+install_metadata_route(app, update_metadata, path="/api/update_metadata/{channel_id}")
+
+
 # 썸네일 상태갱신 API
-@app.get("/api/thumbnail_status")
 async def api_thumbnail_status(request: Request, login: Any = Depends(requireLogin)):
     # 캐시-우선 썸네일 목록 (stale이면 백그라운드 갱신 트리거)
     async with request.app.state.channels_lock:
@@ -1082,6 +1084,9 @@ async def api_thumbnail_status(request: Request, login: Any = Depends(requireLog
         pass
 
     return JSONResponse(content={'channels': items})
+
+
+install_metadata_route(app, api_thumbnail_status, path="/api/thumbnail_status")
 
 
 # 웹 대시보드에 매트릭 API
