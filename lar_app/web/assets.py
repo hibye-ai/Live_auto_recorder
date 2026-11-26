@@ -75,7 +75,7 @@ def _safe_version(version: str) -> str:
 
 def render_head_assets(version: str) -> str:
     safe_version = _safe_version(version)
-    tags = ['<meta name="color-scheme" content="light">']
+    tags = ['<meta name="color-scheme" content="dark">']
     tags.extend(asset.stylesheet_tag(safe_version) for asset in STYLESHEETS)
     tags.append(_CRITICAL_STYLE)
     tags.extend(asset.script_tag(safe_version) for asset in HEAD_SCRIPTS)

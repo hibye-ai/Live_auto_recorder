@@ -16,6 +16,20 @@ Live Auto Recorder includes the following font files in `templates/static/fonts/
 - License: SIL Open Font License 1.1
 - Reserved Font Name: Plex
 
+## Galmuri11
+
+- Project: https://github.com/quiple/galmuri
+- Copyright: Lee Minseo (Minseo Lee)
+- License: SIL Open Font License 1.1
+- Reserved Font Name: Galmuri
+
+## Silkscreen
+
+- Project: https://github.com/googlefonts/silkscreen
+- Copyright: Jason Kottke (The Silkscreen Project Authors)
+- License: SIL Open Font License 1.1
+- Reserved Font Name: Silkscreen
+
 The source projects contain the complete license texts and notices. The bundled fonts remain subject to their respective font licenses; the repository's MIT License applies to the Live Auto Recorder source code and documentation, not to those third-party font files.
 
 ## Integrated library frontend
