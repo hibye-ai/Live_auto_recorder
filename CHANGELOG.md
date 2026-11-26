@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.20 - 2026-11-26
+
+- Update Python and frontend dependencies, including TypeScript 7 and Vite 8.
+
 ## v1.1.19 - 2026-08-26
 
 - Improve recording runtime stability and recovery flow
