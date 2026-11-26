@@ -1,5 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
+import { PNG } from 'pngjs';
 import { mockConsoleApi } from './fixtures';
 
 const candidate = readFileSync('../templates/static/css/console.css', 'utf8');
@@ -50,7 +51,15 @@ for (const viewport of [{width:1440, height:1050}, {width:360, height:800}]) {
       expect(after.state).toEqual(before.state);
       await testInfo.attach('baseline', {body: before.image, contentType: 'image/png'});
       await testInfo.attach('candidate', {body: after.image, contentType: 'image/png'});
-      expect(after.image.equals(before.image)).toBe(true);
+      const beforePixels = PNG.sync.read(before.image);
+      const afterPixels = PNG.sync.read(after.image);
+      expect([afterPixels.width, afterPixels.height]).toEqual([beforePixels.width, beforePixels.height]);
+      // Chromium may vary anti-aliasing by one or two colour levels between frames.
+      let changedChannels = 0;
+      for (let i = 0; i < beforePixels.data.length; i++) {
+        if (Math.abs(beforePixels.data[i] - afterPixels.data[i]) > 2) changedChannels++;
+      }
+      expect(changedChannels).toBe(0);
       if (path === '/recording') {
         await expect(page.locator('#start-all-recording')).toBeVisible();
         await expect(page.locator('#stop-all-recording')).toBeVisible();
