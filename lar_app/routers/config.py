@@ -12,6 +12,11 @@ from lar_app.config_safety import resolve_secret
 from lar_app.config_validation import ConfigValidationError, normalize_config_update
 
 
+def install_legacy_telegram_test(app: Any, endpoint: Any) -> None:
+    """Keep the core Telegram test ahead of the later router duplicate."""
+    app.add_api_route('/api/test_telegram', endpoint, methods=['GET'])
+
+
 def install_config_backup_route(app: Any, endpoint: Any, *, method: str) -> None:
     """Register a legacy backup endpoint at its original route position."""
     paths = {"GET": "/api/config_export", "POST": "/api/config_import"}

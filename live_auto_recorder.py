@@ -21,10 +21,12 @@ from typing import Optional, Any, List, Dict, Literal, TypedDict
 
 from module.recording_history import get_history, get_stats as get_recording_stats
 from lar_app.routers.recording import install_recording_history_route
-from lar_app.routers.config import install_config_backup_route
+from lar_app.routers.config import install_config_backup_route, install_legacy_telegram_test
 from lar_app.routers.account import install_account_route
 from lar_app.routers.metadata import install_metadata_route
 from lar_app.routers.monitoring import install_monitoring_route, install_metrics_websocket
+from lar_app.routers.legacy_pages import install_legacy_page
+from lar_app.routers.files import install_legacy_file_cleanup
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -787,7 +789,6 @@ async def _seedMetadataWEB(app):
 
 
 # 녹화 현황 페이지
-@app.get("/recording", response_class=HTMLResponse)
 async def recording_page(request: Request, login: Any = Depends(requireLogin)):
     async with request.app.state.channels_lock:
         chs = [dict(c) for c in request.app.state.channels]
@@ -829,6 +830,9 @@ async def recording_page(request: Request, login: Any = Depends(requireLogin)):
         'channels': chs,
         'program_version': PROGRAM_VERSION
     })
+
+
+install_legacy_page(app, recording_page, path="/recording")
 
 
 async def get_status(request: Request):
@@ -1203,7 +1207,6 @@ async def api_sys_metrics():
 install_monitoring_route(app, api_sys_metrics, path="/api/sys_metrics")
 
 
-@app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     config = request.app.state.config
     loginMode = False
@@ -1226,6 +1229,9 @@ async def index(request: Request):
             'program_name': PROGRAM_NAME,
             'program_version': PROGRAM_VERSION
         })
+
+
+install_legacy_page(app, index, path="/")
 
 
 # 로그인 라우트
@@ -1365,7 +1371,6 @@ install_account_route(app, user_info, path="/user_info", method="GET")
 
 
 # 텔레그램 알림 API 테스트 함수
-@app.get("/api/test_telegram")
 async def testTelegram(request: Request, login: Any = Depends(requireLogin)):
     try:
         cfg = loadConfig() or {}
@@ -1401,6 +1406,9 @@ async def testTelegram(request: Request, login: Any = Depends(requireLogin)):
             )
     except Exception:
         return JSONResponse(content={'status': 'error', 'message': '텔레그램 테스트 메시지를 전송하지 못했습니다.'}, status_code=500)
+
+
+install_legacy_telegram_test(app, testTelegram)
 
 
 # ── #3: 녹화 이력 API ────────────────────────────────────────
@@ -1504,7 +1512,6 @@ install_config_backup_route(app, api_config_import, method="POST")
 
 
 # ── #5: 파일 정리 (Retention) API ────────────────────────────
-@app.post("/api/file_cleanup")
 async def api_file_cleanup(request: Request, login: Any = Depends(requireLogin)):
     from module.v2_runtime import enabled as v2_enabled
     if v2_enabled():
@@ -1601,6 +1608,9 @@ async def api_file_cleanup(request: Request, login: Any = Depends(requireLogin))
         }
     except Exception as e:
         return JSONResponse(content={"status": "error", "message": str(e)}, status_code=500)
+
+
+install_legacy_file_cleanup(app, api_file_cleanup)
 
 
 # ── #6: WebSocket 실시간 대시보드 ────────────────────────────
