@@ -8,6 +8,11 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import JSONResponse
 
 
+def install_recording_history_route(app: Any, endpoint: Any) -> None:
+    """Register the legacy history callable at its original position."""
+    app.add_api_route("/api/recording_history", endpoint, methods=["GET"])
+
+
 def install_recording_routes(app: Any, core: Any) -> None:
     """Register recording-control endpoints while delegating domain work to the core."""
 

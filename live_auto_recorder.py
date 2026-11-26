@@ -20,6 +20,7 @@ from datetime import datetime
 from typing import Optional, Any, List, Dict, Literal, TypedDict
 
 from module.recording_history import get_history, get_stats as get_recording_stats
+from lar_app.routers.recording import install_recording_history_route
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -1375,7 +1376,6 @@ async def testTelegram(request: Request, login: Any = Depends(requireLogin)):
 
 
 # ── #3: 녹화 이력 API ────────────────────────────────────────
-@app.get("/api/recording_history")
 async def api_recording_history(
     limit: int = 50,
     channel_id: Optional[str] = None,
@@ -1390,6 +1390,8 @@ async def api_recording_history(
     except Exception as e:
         return JSONResponse(content={"status": "error", "message": str(e)}, status_code=500)
 
+
+install_recording_history_route(app, api_recording_history)
 
 # ── #4: 설정 백업/복원 API ───────────────────────────────────
 @app.get("/api/config_export")
