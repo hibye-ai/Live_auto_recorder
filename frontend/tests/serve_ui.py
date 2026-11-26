@@ -44,14 +44,16 @@ def render_page(path: str, *, baseline: bool = False) -> str:
         'program_name': 'Live Auto Recorder', 'program_version': VERSION,
         'page_title': '작업 상태' if path == '/jobs' else '녹화 목록',
         'loginMode': False, 'config': {'loginMode': False, 'autoRecordingMode': False},
-        'channels': [], 'account': {}, 'telegram': {}, 'error_message': '',
+        'channels': ([{'id': 'ch-1', 'name': '초록 스튜디오', 'platform': 'chzzk', 'record_enabled': True, 'status': '대기 중', 'live_title': '합성 방송', 'quality': 'best', 'extension': 'ts', 'output_dir': '/synthetic', 'watchPartyExcludeTags': []}] if path in ('/recording', '/channels') else []), 'account': {}, 'telegram': {}, 'cookies': {}, 'error_message': '',
     }
     source = environment
     if baseline:
         if path != '/':
             raise ValueError('Baseline comparison is only for the preserved dashboard')
         source = Environment(loader=DictLoader({'index.html': baseline_file('index.html').decode('utf-8')}), autoescape=select_autoescape(['html']))
-    html = inject_console_assets(source.get_template(template).render(**context), VERSION)
+    html = source.get_template(template).render(**context)
+    if path != '/register':
+        html = inject_console_assets(html, VERSION)
     return html.replace('/static/', '/__baseline/static/') if baseline else html
 
 
@@ -74,7 +76,7 @@ class Handler(SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(body)
             return
-        if path in {'/', '/jobs', '/broadcasts', '/channels', '/config', '/recording', '/operations', '/cookies', '/files'} or path.startswith('/broadcasts/'):
+        if path in {'/', '/jobs', '/broadcasts', '/channels', '/config', '/recording', '/operations', '/cookies', '/files', '/register'} or path.startswith('/broadcasts/'):
             body = render_page(path, baseline=path == '/' and parse_qs(parsed.query).get('baseline') == ['1']).encode('utf-8')
             self.send_response(200)
             self.send_header('Content-Type', 'text/html; charset=utf-8')

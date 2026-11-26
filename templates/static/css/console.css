@@ -63,7 +63,7 @@
   --r-lg: var(--lar-radius-lg);
 }
 html[data-theme="dark"] { color-scheme: light !important; }
-*, *::before, *::after { box-sizing: border-box; }
+*::before, *::after { box-sizing: border-box; }
 html { min-height: 100%; background: var(--lar-bg) !important; }
 body {
   min-height: 100vh;
