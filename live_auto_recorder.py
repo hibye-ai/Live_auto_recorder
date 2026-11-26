@@ -22,6 +22,7 @@ from typing import Optional, Any, List, Dict, Literal, TypedDict
 from module.recording_history import get_history, get_stats as get_recording_stats
 from lar_app.routers.recording import install_recording_history_route
 from lar_app.routers.config import install_config_backup_route
+from lar_app.routers.account import install_account_route
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -1214,7 +1215,6 @@ async def index(request: Request):
 
 
 # 로그인 라우트
-@app.post("/login")
 async def login(request: Request, username: str = Form(...), password: str = Form(...)):
     return JSONResponse(
         content={"status": "disabled", "message": "로그인 기능을 사용하지 않습니다.", "redirect_url": "/"},
@@ -1222,27 +1222,35 @@ async def login(request: Request, username: str = Form(...), password: str = For
     )
 
 
+install_account_route(app, login, path="/login", method="POST")
+
+
 # 로그아웃 라우트
-@app.get("/logout")
 async def logout(request: Request):
     request.session.clear()
     return RedirectResponse(url='/', status_code=302)
 
 
+install_account_route(app, logout, path="/logout", method="GET")
+
+
 # GET 요청을 처리하여 계정 생성 페이지를 렌더링
-@app.get("/register")
 async def register_page(request: Request):
     return RedirectResponse(url="/", status_code=302)
 
 
+install_account_route(app, register_page, path="/register", method="GET")
+
+
 # 계정 생성 폼을 처리하는 POST 요청
-@app.post("/register")
 async def register(request: Request, username: str = Form(...), password: str = Form(...), password_confirm: str = Form(...)):
     return RedirectResponse(url="/", status_code=303)
 
 
+install_account_route(app, register, path="/register", method="POST")
+
+
 # 계정 수정/삭제 관련 라우트
-@app.post("/updateAccount")
 async def updateAccount(
     request: Request, 
     username: str = Form(...), 
@@ -1315,8 +1323,10 @@ async def updateAccount(
         )
 
 
+install_account_route(app, updateAccount, path="/updateAccount", method="POST")
+
+
 # 계정 사용자 정보 전달 
-@app.get("/user_info")
 async def user_info(request: Request):
     account = loadAccount()
     config = request.app.state.config or {}
@@ -1335,6 +1345,9 @@ async def user_info(request: Request):
     payload.update({"logged_in": True, "username": "로컬 사용자"})
 
     return JSONResponse(content=payload)
+
+
+install_account_route(app, user_info, path="/user_info", method="GET")
 
 
 # 텔레그램 알림 API 테스트 함수
