@@ -43,7 +43,7 @@ def render_page(path: str, *, baseline: bool = False) -> str:
         'url_for': url_for,
         'program_name': 'Live Auto Recorder', 'program_version': VERSION,
         'page_title': '작업 상태' if path == '/jobs' else '녹화 목록',
-        'loginMode': False, 'config': {'loginMode': False, 'autoRecordingMode': False},
+        'loginMode': False, 'fm_enabled': True, 'config': {'loginMode': False, 'autoRecordingMode': False},
         'channels': ([{'id': 'ch-1', 'name': '초록 스튜디오', 'platform': 'chzzk', 'record_enabled': True, 'status': '대기 중', 'live_title': '합성 방송', 'quality': 'best', 'extension': 'ts', 'output_dir': '/synthetic', 'watchPartyExcludeTags': []}] if path in ('/recording', '/channels') else []), 'account': {}, 'telegram': {}, 'cookies': {}, 'error_message': '',
     }
     source = environment
