@@ -30,6 +30,7 @@ for (const viewport of [{width:1440, height:1050}, {width:360, height:800}]) {
   for (const path of screens) {
     test(`legacy CSS parity ${path} ${viewport.width}`, async ({page}, testInfo) => {
       await page.setViewportSize(viewport);
+      await page.clock.setFixedTime(new Date('2026-10-11T12:00:00Z'));
       await mockConsoleApi(page);
       let css = baseline;
       await page.route('**/static/css/console.css*', route => route.fulfill({contentType:'text/css', body:css}));
